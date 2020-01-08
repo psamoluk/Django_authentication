@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mt-4 text-center text-muted">Login to Product Hunt</h2>
+
+{% if error %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{error}}
+    </div>
+{% endif %}
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div>
+        <div class="container mt-5">
+            <div class="form-group">
+                <label for="txtEmail">Email address</label>
+                <input type="email" class="form-control" id="txtEmail" name="email" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label for="txtPassword1">Password</label>
+                <input type="password" class="form-control" id="txtPassword" name="password"/>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" class="form-control btn-secondary btn-sm" id="btnSubmit" value="Submit" width="100px"/>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">Don't have an account? <a href="{% url 'signup' %}">Register</a></div>
+</form>
+{% endblock %}

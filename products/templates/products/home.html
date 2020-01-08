@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="text-muted mt-2 sm">Currently logged in as: {{user}}</div>
+{% endif %}
+{% endblock %}
