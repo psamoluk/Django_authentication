@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product
 
@@ -19,6 +19,18 @@ def create(request):
         product.image = request.FILES['image']
         product.hunter = request.user
         product.save()
-        return render(request, 'products/create.html', {'message':'Product has been added'})
+        # return render(request, 'products/create.html', {'message':'Product has been added'})
+        return redirect('/products/product/' + str(product.id))
     else:
         return render(request, 'products/create.html')
+
+def product(request, product_id):
+    # product = Product.objects.filter(id=product_id)
+    if request.method == "POST":
+        product = get_object_or_404(Product, id=product_id)
+        product.votes_total += 1
+        product.save()
+        return redirect('/products/product/' + str(product.id))
+    else:
+        product = get_object_or_404(Product, id=product_id)
+        return render(request, 'products/product.html',{'product':product})

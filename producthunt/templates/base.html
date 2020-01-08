@@ -10,7 +10,7 @@
     <meta name="generator" content="Jekyll v3.8.6">
     <title>{% block title %}Hobby template{% endblock %}</title>
 
-    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"/> -->
       <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -55,6 +55,8 @@
                         <a class="nav-item nav-link" href="{% url 'signup' %}">Signup</a>
                         <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                     {% else %}
+                        <a class="nav-item nav-link disabled"><small>{{user}}</small></a>
+                        <a class="nav-item nav-link" href="{% url 'create' %}"><i class="fas fa-plus-square"></i> New</a>
                         <form id="logout" method="POST" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <a class="nav-item nav-link" href="javascript:document.querySelector('#logout').submit();">
@@ -91,6 +93,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+    <script src="https://kit.fontawesome.com/9765a4a63d.js" SameSite=Secure></script>
 </body>
 
 </html>
