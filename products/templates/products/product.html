@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-3">
+        <!-- {% if message %} -->
+            <div class="alert alert-success text-center" role="alert">
+                {{message}}
+            </div>
+        <!-- {% endif %} -->
+        <h2>Product details</h2>
+        <hr/>
+        <div class="row">
+            <div class="col-3">
+                <img src="{{product.icon.url}}" class="img-fluid"/>
+            </div>
+            <div class="col-9">
+                <a href="{{product.url}}"><h3>{{product.title}}</h3></a>
+                
+                    <div class="text-muted">Hunted by {{product.hunter}}</div>
+                    <div class="text-muted"><small>Date: {{product.pub_date_pretty}}</small></div>
+                
+                <form method="POST" action="{% url 'product' product.id %}" id="upvote_form">
+                    {% csrf_token %}
+                    
+                </form>
+                <a class="btn btn-success mt-2 {% if not user.is_authenticated %}disabled{% endif %}" role="button" onclick="javascript:document.querySelector('#upvote_form').submit();"><i class="fas fa-arrow-up pr-2"></i>Upvote ({{product.votes_total}})</a>
+                {% if not user.is_authenticated %}<div class="text-muted"><small>You must be logged in to upvote</small></div>{% endif %}
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                      {{product.body}}
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <img src="{{product.image.url}}" class="img-fluid"/>
+            </div>
+        </div>
+    </div>
+    
+    
+{% endblock %}
